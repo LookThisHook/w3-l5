@@ -1,0 +1,26 @@
+CREATE PROCEDURE ContaVerbali
+AS
+BEGIN
+    SELECT COUNT(*) AS NumeroVerbali FROM VERBALE;
+END;
+
+//////////////////////////////////////////////////////////////////////////////////////////
+CREATE PROCEDURE VerbaliPerAnagrafica
+    @Cognome NVARCHAR(50)
+AS
+BEGIN
+    SELECT A.Cognome, A.Nome, V.DataViolazione, V.Importo, V.DecurtamentoPunti
+    FROM VERBALE V
+    JOIN ANAGRAFICA A ON V.idAnagrafica = A.idAnagrafica
+    WHERE A.Cognome = @Cognome;
+END;
+//////////////////////////////////////////////////////////////////////////////////////////
+CREATE PROCEDURE VerbaliPerImporto
+    @ImportoMinimo DECIMAL(10,2)
+AS
+BEGIN
+    SELECT A.Cognome, A.Nome, V.DataViolazione, V.Importo, V.DecurtamentoPunti
+    FROM VERBALE V
+    JOIN ANAGRAFICA A ON V.idAnagrafica = A.idAnagrafica
+    WHERE V.Importo > @ImportoMinimo;
+END;

@@ -1,0 +1,2 @@
+SELECT COUNT(*) AS NumeroVerbali
+FROM VERBALE;
